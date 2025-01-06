@@ -5,9 +5,18 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { UserModule } from './user/user.module';
+import { ConfigModule } from '@nestjs/config';
+import * as dotenv from 'dotenv'
+
+const envFilePath = `.env.${process.env.NODE_ENV || 'development'}`
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath,
+      load: [() => dotenv.config({ path: '.env' })]
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       playground: true,
