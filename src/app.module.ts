@@ -9,6 +9,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as dotenv from 'dotenv'
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigEnum } from './enum/config';
+import { AdminUserModule } from './admin-user/admin-user.module';
+import { AdminUser } from './admin-user/admin-user.entity';
+import { Profile } from './admin-user/profile.entity';
+import { Roles } from './roles/roles.entity';
+import { Logs } from './logs/logs.entity';
 
 const envFilePath = `.env.${process.env.NODE_ENV || 'development'}`
 
@@ -35,12 +40,13 @@ const envFilePath = `.env.${process.env.NODE_ENV || 'development'}`
         username: configService.get(ConfigEnum.DB_USERNAME),
         password: configService.get(ConfigEnum.DB_PASSWORD),
         database: configService.get(ConfigEnum.DB_DATABASE),
-        entities: [],
+        entities: [AdminUser, Profile, Roles, Logs],
         synchronize: configService.get(ConfigEnum.DB_SYNC),
         logging: ['error']
       })
     }),
-    UserModule
+    UserModule,
+    AdminUserModule
   ],
   controllers: [AppController],
   providers: [AppService],
