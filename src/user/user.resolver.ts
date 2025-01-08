@@ -1,8 +1,8 @@
-import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
-import { User } from "./user.model";
-import { UserService } from "./user.service";
-import { NotFoundException } from "@nestjs/common";
-import { NewUserInput } from "./new-user.model";
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { User } from './user.model';
+import { UserService } from './user.service';
+import { NotFoundException } from '@nestjs/common';
+import { NewUserInput } from './new-user.model';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -19,19 +19,21 @@ export class UserResolver {
     // exampleUser.createDate = new Date()
 
     // return exampleUser
-    const user = await this.userService.findOneById(id)
+    const user = await this.userService.findOneById(id);
 
     if (!user) {
-      throw new NotFoundException(id)
+      throw new NotFoundException(id);
     }
 
-    return user
+    return user;
   }
 
   @Mutation(() => User)
-  async createUser(@Args('newUserInput') newUserInput: NewUserInput): Promise<User> {
-    const newUser = await this.userService.createUser(newUserInput)
+  async createUser(
+    @Args('newUserInput') newUserInput: NewUserInput,
+  ): Promise<User> {
+    const newUser = await this.userService.createUser(newUserInput);
 
-    return newUser
+    return newUser;
   }
 }

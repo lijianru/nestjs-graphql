@@ -1,11 +1,17 @@
-import { AdminUser } from "src/admin-user/admin-user.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { AdminUser } from 'src/admin-user/admin-user.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Logs {
   @PrimaryGeneratedColumn()
   id: number;
-  
+
   @Column()
   path: string;
 
@@ -18,7 +24,7 @@ export class Logs {
   @Column()
   result: number;
 
-  @ManyToOne(() => AdminUser, user => user.logs)
+  @ManyToOne(() => AdminUser, (user) => user.logs)
   @JoinColumn()
-  user: AdminUser
+  user: AdminUser;
 }

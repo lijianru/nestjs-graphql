@@ -6,7 +6,7 @@ import { ConfigEnum } from './enum/config';
 export class AppService {
   constructor(private readonly configService: ConfigService) {}
   getHello(): string {
-    const dbHost = this.configService.get(ConfigEnum.DB_HOST)
+    const dbHost = this.configService.get(ConfigEnum.DB_HOST);
     return 'Hello World!' + dbHost;
   }
 }

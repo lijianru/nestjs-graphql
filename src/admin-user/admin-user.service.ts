@@ -7,49 +7,53 @@ import { Logs } from 'src/logs/logs.entity';
 @Injectable()
 export class AdminUserService {
   constructor(
-    @InjectRepository(AdminUser) private readonly adminUserRepository: Repository<AdminUser>,
-    @InjectRepository(Logs) private readonly logsRepository: Repository<Logs>
+    @InjectRepository(AdminUser)
+    private readonly adminUserRepository: Repository<AdminUser>,
+    @InjectRepository(Logs) private readonly logsRepository: Repository<Logs>,
   ) {}
 
   findAll() {
-    return this.adminUserRepository.find()
+    return this.adminUserRepository.find();
   }
 
   find(username: string) {
-    return this.adminUserRepository.findOne({where: {username}})
+    return this.adminUserRepository.findOne({ where: { username } });
   }
 
   findOne(id: number) {
-    return this.adminUserRepository.findOne({where: {id}})
+    return this.adminUserRepository.findOne({ where: { id } });
   }
 
   create(user: AdminUser) {
-    const userTmp = this.adminUserRepository.create(user)
+    const userTmp = this.adminUserRepository.create(user);
 
-    return this.adminUserRepository.save(userTmp)
+    return this.adminUserRepository.save(userTmp);
   }
 
   update(id: number, user: Partial<AdminUser>) {
-    return this.adminUserRepository.update(id, user)
+    return this.adminUserRepository.update(id, user);
   }
 
   remove(id: number) {
-    return this.adminUserRepository.delete(id)
+    return this.adminUserRepository.delete(id);
   }
 
   findProfile(id: number) {
     return this.adminUserRepository.findOne({
       where: { id },
       relations: {
-        profile: true
-      }
-    })
+        profile: true,
+      },
+    });
   }
 
   async findUserLogs(id: number) {
-    const user = await this.findOne(id)
-    return this.logsRepository.find({ where: { user }, relations: { 
-      user: true
-    } })
+    const user = await this.findOne(id);
+    return this.logsRepository.find({
+      where: { user },
+      relations: {
+        user: true,
+      },
+    });
   }
 }

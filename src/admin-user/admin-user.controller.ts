@@ -8,25 +8,25 @@ export class AdminUserController {
 
   @Get()
   getAdminUsers() {
-    return this.adminUserService.findAll()
+    return this.adminUserService.findAll();
   }
 
   @Post()
   addUser() {
     const user: AdminUser = {
-      username:'richard',
-      password: '111111'
-    } as AdminUser
-    return this.adminUserService.create(user)
+      username: 'richard',
+      password: '111111',
+    } as AdminUser;
+    return this.adminUserService.create(user);
   }
 
   @Get('/profile')
   getUserProfile() {
-    return this.adminUserService.findProfile(1)
+    return this.adminUserService.findProfile(1);
   }
 
   @Get('/logs')
   getUserLogs() {
-    return this.adminUserService.findUserLogs(1)
+    return this.adminUserService.findUserLogs(1);
   }
 }

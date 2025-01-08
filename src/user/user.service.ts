@@ -5,26 +5,26 @@ import { randomUUID } from 'crypto';
 
 @Injectable()
 export class UserService {
-  private users: User[]
+  private users: User[];
 
   constructor() {
-    this.users = []
+    this.users = [];
   }
 
   async findOneById(id: string): Promise<User> {
-    const user = this.users.find((user) => user.id === id)
+    const user = this.users.find((user) => user.id === id);
 
-    return user
+    return user;
   }
 
   async createUser(user: NewUserInput): Promise<User> {
     const newUser: User = {
       ...user,
       createDate: new Date(),
-      id: randomUUID()
-    }
-    this.users.push(newUser)
+      id: randomUUID(),
+    };
+    this.users.push(newUser);
 
-    return newUser
+    return newUser;
   }
 }

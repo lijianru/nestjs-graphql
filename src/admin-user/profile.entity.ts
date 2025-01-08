@@ -1,11 +1,17 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { AdminUser } from "./admin-user.entity";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { AdminUser } from './admin-user.entity';
 
 @Entity()
 export class Profile {
   @PrimaryGeneratedColumn()
   id: number;
-  
+
   @Column()
   gender: number;
 
@@ -17,5 +23,5 @@ export class Profile {
 
   @OneToOne(() => AdminUser)
   @JoinColumn()
-  user: AdminUser
+  user: AdminUser;
 }

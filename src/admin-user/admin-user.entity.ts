@@ -1,13 +1,21 @@
-import { Logs } from "src/logs/logs.entity";
-import { Roles } from "src/roles/roles.entity";
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Profile } from "./profile.entity";
+import { Logs } from 'src/logs/logs.entity';
+import { Roles } from 'src/roles/roles.entity';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Profile } from './profile.entity';
 
 @Entity()
 export class AdminUser {
   @PrimaryGeneratedColumn()
   id: number;
-  
+
   @Column()
   username: string;
 
@@ -15,12 +23,12 @@ export class AdminUser {
   password: string;
 
   @OneToMany(() => Logs, (logs) => logs.user)
-  logs: Logs[]
+  logs: Logs[];
 
-  @ManyToMany(() => Roles, roles => roles.users)
+  @ManyToMany(() => Roles, (roles) => roles.users)
   @JoinTable({ name: 'users_roles' })
-  roles: Roles[]
+  roles: Roles[];
 
-  @OneToOne(() => Profile, profile => profile.user)
-  profile: Profile
+  @OneToOne(() => Profile, (profile) => profile.user)
+  profile: Profile;
 }

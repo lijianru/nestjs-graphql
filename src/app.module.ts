@@ -6,7 +6,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { UserModule } from './user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import * as dotenv from 'dotenv'
+import * as dotenv from 'dotenv';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigEnum } from './enum/config';
 import { AdminUserModule } from './admin-user/admin-user.module';
@@ -15,14 +15,14 @@ import { Profile } from './admin-user/profile.entity';
 import { Roles } from './roles/roles.entity';
 import { Logs } from './logs/logs.entity';
 
-const envFilePath = `.env.${process.env.NODE_ENV || 'development'}`
+const envFilePath = `.env.${process.env.NODE_ENV || 'development'}`;
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath,
-      load: [() => dotenv.config({ path: '.env' })]
+      load: [() => dotenv.config({ path: '.env' })],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
@@ -42,11 +42,11 @@ const envFilePath = `.env.${process.env.NODE_ENV || 'development'}`
         database: configService.get(ConfigEnum.DB_DATABASE),
         entities: [AdminUser, Profile, Roles, Logs],
         synchronize: configService.get(ConfigEnum.DB_SYNC),
-        logging: ['error']
-      })
+        logging: ['error'],
+      }),
     }),
     UserModule,
-    AdminUserModule
+    AdminUserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
