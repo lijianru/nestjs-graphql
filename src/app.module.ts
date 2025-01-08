@@ -14,6 +14,7 @@ import { AdminUser } from './admin-user/admin-user.entity';
 import { Profile } from './admin-user/profile.entity';
 import { Roles } from './roles/roles.entity';
 import { Logs } from './logs/logs.entity';
+import { LogsModule } from './logs/logs.module';
 
 const envFilePath = `.env.${process.env.NODE_ENV || 'development'}`;
 
@@ -48,9 +49,10 @@ const envFilePath = `.env.${process.env.NODE_ENV || 'development'}`;
     }),
     UserModule,
     AdminUserModule,
+    LogsModule,
   ],
   controllers: [AppController],
   providers: [AppService, Logger],
-  exports: [Logger]
+  exports: [Logger],
 })
 export class AppModule {}

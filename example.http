@@ -1,0 +1,32 @@
+### 1. 获取所有用户
+GET http://localhost:3000/admin-user?page=1&pageSize=10
+
+### 2. 获取单个用户
+GET http://localhost:3000/admin-user/1
+
+### 3. 添加用户
+POST http://localhost:3000/admin-user
+content-type: application/json
+
+{
+  "username": "richard",
+  "password": "111111"
+}
+
+### 4. 更新用户
+PUT http://localhost:3000/admin-user/1
+content-type: application/json
+
+{
+  "username": "richard",
+  "password": "222222"
+}
+
+### 5. 删除用户
+DELETE http://localhost:3000/admin-user/1
+
+### 6. 获取用户资料
+GET http://localhost:3000/admin-user/profile
+
+### 7. 获取用户日志
+GET http://localhost:3000/logs/1

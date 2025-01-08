@@ -10,21 +10,21 @@ async function bootstrap() {
       new winston.transports.Console({
         format: winston.format.combine(
           winston.format.timestamp(),
-          utilities.format.nestLike()
-        )
-      })
-    ]
-  })
+          utilities.format.nestLike(),
+        ),
+      }),
+    ],
+  });
 
   const logger = WinstonModule.createLogger({
     instance,
-  })
+  });
   const app = await NestFactory.create(AppModule, {
     logger,
   });
-  const httpAdapter = app.get(HttpAdapterHost)
+  const httpAdapter = app.get(HttpAdapterHost);
 
-  app.useGlobalFilters(new AllExceptionFilter(logger, httpAdapter))
+  app.useGlobalFilters(new AllExceptionFilter(logger, httpAdapter));
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

@@ -1,21 +1,29 @@
-import { Inject, Injectable, Logger, LoggerService } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AdminUser } from './admin-user.entity';
 import { Repository } from 'typeorm';
-import { Logs } from 'src/logs/logs.entity';
+import { GetUserDto } from './dto/get-user.dto';
 
 @Injectable()
 export class AdminUserService {
   constructor(
     @InjectRepository(AdminUser)
     private readonly adminUserRepository: Repository<AdminUser>,
-    @InjectRepository(Logs) private readonly logsRepository: Repository<Logs>,
-    @Inject(Logger) private readonly logger: LoggerService
   ) {}
 
-  findAll() {
-    this.logger.log('Find All');
-    return this.adminUserRepository.find();
+  findAll(query: GetUserDto) {
+    const { page, pageSize, username } = query;
+    return this.adminUserRepository.find({
+      skip: ((page || 1) - 1) * pageSize,
+      take: pageSize || 10,
+      relations: {
+        profile: true,
+        roles: true,
+      },
+      where: {
+        username,
+      },
+    });
   }
 
   find(username: string) {
@@ -45,16 +53,6 @@ export class AdminUserService {
       where: { id },
       relations: {
         profile: true,
-      },
-    });
-  }
-
-  async findUserLogs(id: number) {
-    const user = await this.findOne(id);
-    return this.logsRepository.find({
-      where: { user },
-      relations: {
-        user: true,
       },
     });
   }
