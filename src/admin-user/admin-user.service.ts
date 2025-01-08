@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger, LoggerService } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AdminUser } from './admin-user.entity';
 import { Repository } from 'typeorm';
@@ -10,9 +10,11 @@ export class AdminUserService {
     @InjectRepository(AdminUser)
     private readonly adminUserRepository: Repository<AdminUser>,
     @InjectRepository(Logs) private readonly logsRepository: Repository<Logs>,
+    @Inject(Logger) private readonly logger: LoggerService
   ) {}
 
   findAll() {
+    this.logger.log('Find All');
     return this.adminUserRepository.find();
   }
 
