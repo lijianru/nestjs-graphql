@@ -28,6 +28,8 @@ export class AllExceptionFilter implements ExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
+    const msg = exception['response'] || 'Internal service error';
+
     const responseBody = {
       headers: request.headers,
       query: request.query,
@@ -36,10 +38,10 @@ export class AllExceptionFilter implements ExceptionFilter {
       timestamp: new Date().toISOString(),
       ip: requestIp.getClientIp(request),
       exception: exception['name'],
-      error: exception['response'] || 'Internal service error',
+      error: msg,
     };
 
-    this.logger.error(responseBody);
+    this.logger.error('[toimc]', responseBody);
     httpAdapter.reply(response, responseBody, httpStatus);
   }
 }

@@ -24,9 +24,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       timestamp: new Date().toISOString(),
       path: request.url,
       method: request.method,
-      message: exception.message || HttpException.name,
+      message: exception.message || exception.name,
     });
-
-    // throw new Error("Method not implemented.");
   }
 }

@@ -9,10 +9,14 @@ import {
   Post,
   Put,
   Query,
+  UseFilters,
 } from '@nestjs/common';
 import { GetUserDto } from './dto/get-user.dto';
+import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
+import { TypeormFilter } from 'src/filters/typeorm-filter.filter';
 
 @Controller('admin-user')
+@UseFilters(new TypeormFilter)
 export class AdminUserController {
   constructor(private readonly adminUserService: AdminUserService) {}
 

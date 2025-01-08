@@ -30,3 +30,28 @@ GET http://localhost:3000/admin-user/profile
 
 ### 7. 获取用户日志
 GET http://localhost:3000/logs/1
+
+### 8. 获取所有角色
+GET http://localhost:3000/roles
+
+### 9. 获取单个角色
+GET http://localhost:3000/roles/1
+
+### 10. 添加角色
+POST http://localhost:3000/roles
+content-type: application/json
+
+{
+  "name": "super-admin"
+}
+
+### 11. 更新角色
+PUT http://localhost:3000/roles/3
+content-type: application/json
+
+{
+  "name": "developer"
+} 
+
+### 12. 删除角色
+DELETE http://localhost:3000/roles/2
