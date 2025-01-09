@@ -1,11 +1,24 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseFilters } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseFilters,
+  UseGuards,
+} from '@nestjs/common';
 import { Roles } from './roles.entity';
 import { RolesService } from './roles.service';
 import { TypeormFilter } from 'src/filters/typeorm-filter.filter';
 import { CreateRolesDto } from './dto/create-roles.dto';
+import { JwtGuard } from 'src/guards/jwt.guard';
+import { AdminGuard } from 'src/guards/admin.guard';
 
 @Controller('roles')
 @UseFilters(new TypeormFilter())
+@UseGuards(JwtGuard, AdminGuard)
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 

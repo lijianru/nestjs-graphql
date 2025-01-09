@@ -37,9 +37,11 @@ GET http://localhost:3000/logs/1
 
 ### 8. 获取所有角色
 GET http://localhost:3000/roles
+Authorization: Bearer {{token}}
 
 ### 9. 获取单个角色
 GET http://localhost:3000/roles/1
+Authorization: Bearer {{token}}
 
 ### 10. 添加角色
 POST http://localhost:3000/roles

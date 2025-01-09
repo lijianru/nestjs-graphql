@@ -16,9 +16,11 @@ import { GetUserDto } from './dto/get-user.dto';
 import { TypeormFilter } from 'src/filters/typeorm-filter.filter';
 import { AuthGuard } from '@nestjs/passport';
 import { AdminGuard } from 'src/guards/admin.guard';
+import { JwtGuard } from 'src/guards/jwt.guard';
 
 @Controller('admin-user')
 @UseFilters(new TypeormFilter())
+@UseGuards(JwtGuard)
 export class AdminUserController {
   constructor(private readonly adminUserService: AdminUserService) {}
 
@@ -28,7 +30,7 @@ export class AdminUserController {
   }
 
   @Get('/profile')
-  @UseGuards(AuthGuard('jwt'), AdminGuard)
+  @UseGuards(AdminGuard)
   getUserProfile() {
     return this.adminUserService.findProfile(1);
   }
