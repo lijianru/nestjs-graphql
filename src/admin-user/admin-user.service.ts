@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { AdminUser } from './admin-user.entity';
 import { Repository } from 'typeorm';
 import { GetUserDto } from './dto/get-user.dto';
-import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class AdminUserService {
@@ -28,14 +27,17 @@ export class AdminUserService {
   }
 
   find(username: string) {
-    return this.adminUserRepository.findOne({ where: { username } });
+    return this.adminUserRepository.findOne({
+      where: { username },
+      relations: ['roles'],
+    });
   }
 
   findOne(id: number) {
     return this.adminUserRepository.findOne({ where: { id } });
   }
 
-  create(user: CreateUserDto) {
+  async create(user: Partial<AdminUser>) {
     const userTmp = this.adminUserRepository.create(user);
 
     return this.adminUserRepository.save(userTmp);

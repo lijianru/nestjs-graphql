@@ -22,12 +22,6 @@ export class AuthController {
 
   @Post('signup')
   signUp(@Body() signUpDto: SignUpDto) {
-    const { username, password } = signUpDto;
-
-    if (!username || !password) {
-      throw new BadRequestException('用户名和密码不能为空');
-    }
-
     return this.authService.signUp(signUpDto);
   }
 }

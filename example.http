@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJpY2hhcmQiLCJzdWIiOjEsImlhdCI6MTczNjM5MDMxMiwiZXhwIjoxNzM2MzkwMzcyfQ.n6FranzmJptEtwZCBEHqP2-dnNziWdFxlMgPg68hl9o
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJpY2hhcmQiLCJzdWIiOjEsImlhdCI6MTczNjQxNTY0NCwiZXhwIjoxNzM2NTAyMDQ0fQ.i7QCUOypTr2Qtw_Gup8kPoPYvQSE5u-afHt9XDhv_yc
 
 ### 1. 获取所有用户
 GET http://localhost:3000/admin-user?page=1&pageSize=10
@@ -30,6 +30,7 @@ DELETE http://localhost:3000/admin-user/1
 
 ### 6. 获取用户资料
 GET http://localhost:3000/admin-user/profile
+Authorization: Bearer {{token}}
 
 ### 7. 获取用户日志
 GET http://localhost:3000/logs/1
@@ -66,4 +67,13 @@ content-type: application/json
 {
   "username": "richard",
   "password": "222222"
+}
+
+### 14. 注册
+POST http://localhost:3000/auth/signup
+content-type: application/json
+
+{
+  "username": "jianru",
+  "password": "111111"
 }
