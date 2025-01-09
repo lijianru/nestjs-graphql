@@ -1,14 +1,6 @@
 import { Logs } from 'src/logs/logs.entity';
 import { Roles } from 'src/roles/roles.entity';
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  OneToMany,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Profile } from './profile.entity';
 
 @Entity()

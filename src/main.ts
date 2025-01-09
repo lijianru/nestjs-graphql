@@ -8,10 +8,7 @@ async function bootstrap() {
   const instance = winston.createLogger({
     transports: [
       new winston.transports.Console({
-        format: winston.format.combine(
-          winston.format.timestamp(),
-          utilities.format.nestLike(),
-        ),
+        format: winston.format.combine(winston.format.timestamp(), utilities.format.nestLike()),
       }),
     ],
   });

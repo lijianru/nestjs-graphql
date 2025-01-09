@@ -9,5 +9,6 @@ import { Logs } from 'src/logs/logs.entity';
   imports: [TypeOrmModule.forFeature([AdminUser, Logs])],
   controllers: [AdminUserController],
   providers: [AdminUserService],
+  exports: [AdminUserService],
 })
 export class AdminUserModule {}

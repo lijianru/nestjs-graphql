@@ -1,13 +1,16 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJpY2hhcmQiLCJzdWIiOjEsImlhdCI6MTczNjM5MDMxMiwiZXhwIjoxNzM2MzkwMzcyfQ.n6FranzmJptEtwZCBEHqP2-dnNziWdFxlMgPg68hl9o
+
 ### 1. 获取所有用户
 GET http://localhost:3000/admin-user?page=1&pageSize=10
-
+Authorization: Bearer {{token}}
 ### 2. 获取单个用户
 GET http://localhost:3000/admin-user/1
+Authorization: Bearer {{token}}
 
 ### 3. 添加用户
 POST http://localhost:3000/admin-user
 content-type: application/json
-
+Authorization: Bearer {{token}}
 {
   "username": "richard",
   "password": "111111"
@@ -55,3 +58,12 @@ content-type: application/json
 
 ### 12. 删除角色
 DELETE http://localhost:3000/roles/2
+
+### 13. 登录
+POST http://localhost:3000/auth/signin
+content-type: application/json
+
+{
+  "username": "richard",
+  "password": "222222"
+}

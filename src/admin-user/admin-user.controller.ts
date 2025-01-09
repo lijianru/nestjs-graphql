@@ -1,22 +1,13 @@
 import { AdminUser } from './admin-user.entity';
 import { AdminUserService } from './admin-user.service';
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-  Query,
-  UseFilters,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseFilters, UseGuards } from '@nestjs/common';
 import { GetUserDto } from './dto/get-user.dto';
-import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
 import { TypeormFilter } from 'src/filters/typeorm-filter.filter';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('admin-user')
-@UseFilters(new TypeormFilter)
+@UseGuards(AuthGuard)
+@UseFilters(new TypeormFilter())
 export class AdminUserController {
   constructor(private readonly adminUserService: AdminUserService) {}
 

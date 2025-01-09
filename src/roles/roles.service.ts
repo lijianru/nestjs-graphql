@@ -6,12 +6,10 @@ import { CreateRolesDto } from './dto/create-roles.dto';
 
 @Injectable()
 export class RolesService {
-  constructor(
-    @InjectRepository(Roles) private readonly roleRepository: Repository<Roles>,
-  ) {}
+  constructor(@InjectRepository(Roles) private readonly roleRepository: Repository<Roles>) {}
 
   createRole(role: CreateRolesDto) {
-    const roleTmp =  this.roleRepository.create(role);
+    const roleTmp = this.roleRepository.create(role);
 
     return this.roleRepository.save(roleTmp);
   }
@@ -22,7 +20,7 @@ export class RolesService {
 
   async getRoleById(id: number): Promise<Roles> {
     return await this.roleRepository.findOne({ where: { id } });
-  } 
+  }
 
   async updateRole(id: number, role: Roles): Promise<Roles> {
     await this.roleRepository.update(id, role);

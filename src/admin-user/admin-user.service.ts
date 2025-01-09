@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { AdminUser } from './admin-user.entity';
 import { Repository } from 'typeorm';
 import { GetUserDto } from './dto/get-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class AdminUserService {
@@ -34,7 +35,7 @@ export class AdminUserService {
     return this.adminUserRepository.findOne({ where: { id } });
   }
 
-  create(user: AdminUser) {
+  create(user: CreateUserDto) {
     const userTmp = this.adminUserRepository.create(user);
 
     return this.adminUserRepository.save(userTmp);

@@ -16,6 +16,9 @@ import { Roles } from './roles/roles.entity';
 import { Logs } from './logs/logs.entity';
 import { LogsModule } from './logs/logs.module';
 import { RolesModule } from './roles/roles.module';
+import { AuthModule } from './auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from './auth/constants';
 
 const envFilePath = `.env.${process.env.NODE_ENV || 'development'}`;
 
@@ -48,10 +51,16 @@ const envFilePath = `.env.${process.env.NODE_ENV || 'development'}`;
         logging: ['error'],
       }),
     }),
+    JwtModule.register({
+      global: true,
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '60s' },
+    }),
     UserModule,
     AdminUserModule,
     LogsModule,
     RolesModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, Logger],

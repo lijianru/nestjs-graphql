@@ -5,7 +5,7 @@ import { TypeormFilter } from 'src/filters/typeorm-filter.filter';
 import { CreateRolesDto } from './dto/create-roles.dto';
 
 @Controller('roles')
-@UseFilters(new TypeormFilter)
+@UseFilters(new TypeormFilter())
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 
@@ -22,7 +22,7 @@ export class RolesController {
   @Get(':id')
   getRoleById(@Param('id') id: number): Promise<Roles> {
     return this.rolesService.getRoleById(id);
-    }
+  }
 
   @Put(':id')
   updateRole(@Param('id') id: number, @Body() role: Roles): Promise<Roles> {
@@ -33,5 +33,4 @@ export class RolesController {
   deleteRole(@Param('id') id: number): Promise<void> {
     return this.rolesService.deleteRole(id);
   }
-  
 }
